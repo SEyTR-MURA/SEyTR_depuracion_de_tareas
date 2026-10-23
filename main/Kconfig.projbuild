@@ -1,0 +1,39 @@
+# Las opciones declaradas en un Kconfig.projbuild aparecen en el nivel superior
+# del menu de configuracion, junto a las de ESP-IDF, y no dentro del submenu de
+# configuracion de componentes. Se convierten en macros CONFIG_... disponibles
+# desde el codigo.
+#
+# Los pines no estan aqui: estan en main/pines.h, que es donde se declaran los
+# pines del proyecto.
+
+menu "SEyTR - Depuracion de tareas"
+
+    config SEYTR_VARIANTE_PANICO
+        bool "Permitir la variante 5: el watchdog de tareas llama al gestor de panico"
+        default n
+        help
+            En la variante 5, el programa reconfigura el watchdog de tareas en
+            ejecucion para que, al vencer, llame al gestor de panico. El gestor
+            escribe la traza y reinicia la placa. Viene desactivada para que una
+            tecla pulsada por error no reinicie la placa; mientras lo este, la
+            tecla 5 solo avisa.
+
+    config SEYTR_GUARDA_MS
+        int "Tiempo de guarda del antirrebote del pulsador, en milisegundos"
+        range 1 1000
+        default 30
+        help
+            Tiempo durante el cual, despues de una pulsacion aceptada, los
+            flancos siguientes se descartan como rebote. Es el antirrebote de
+            U2-S2; unas decenas de milisegundos suelen bastar.
+
+    config SEYTR_CONFIRMACION_MS
+        int "Espera antes de confirmar el nivel del pulsador, en milisegundos"
+        range 1 1000
+        default 20
+        help
+            Despues de un flanco aceptado, la tarea espera este tiempo y
+            comprueba que el pin sigue a nivel de pulsado, como en U2-S2. Tiene
+            que ser algo mayor que el rebote y menor que el tiempo de guarda.
+
+endmenu

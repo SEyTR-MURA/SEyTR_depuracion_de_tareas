@@ -1,0 +1,25 @@
+# Valores de partida del proyecto. Este fichero se escribe a mano y se versiona;
+# sdkconfig lo genera la herramienta y no se versiona.
+
+# Sin esto, el destino de compilacion por omision no es el de la asignatura.
+CONFIG_IDF_TARGET="esp32s3"
+
+# Frecuencia del tick del planificador. A 1000 Hz el tick dura 1 ms. Es la
+# frecuencia de todos los proyectos de la asignatura.
+CONFIG_FREERTOS_HZ=1000
+
+# Las herramientas de inspeccion de FreeRTOS vienen desactivadas. En el menu
+# de configuracion estan en Component config > FreeRTOS > Kernel, con el
+# nombre de la macro de FreeRTOS:
+#   configUSE_TRACE_FACILITY: guarda en cada tarea los datos que las listan;
+#   configUSE_STATS_FORMATTING_FUNCTIONS: incluye vTaskList() y
+#     vTaskGetRunTimeStats(), que escriben esos datos como tabla;
+#   configGENERATE_RUN_TIME_STATS: cuenta el tiempo de ejecucion de cada
+#     tarea. Activa las otras dos.
+# La cuarta anade a vTaskList() la columna del nucleo al que esta fijada cada
+# tarea. Cuestan memoria y tiempo: en un producto se dejan desactivadas si no
+# hacen falta.
+CONFIG_FREERTOS_USE_TRACE_FACILITY=y
+CONFIG_FREERTOS_USE_STATS_FORMATTING_FUNCTIONS=y
+CONFIG_FREERTOS_GENERATE_RUN_TIME_STATS=y
+CONFIG_FREERTOS_VTASKLIST_INCLUDE_COREID=y
