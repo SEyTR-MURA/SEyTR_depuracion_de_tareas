@@ -102,7 +102,8 @@ programa con una fuga de memoria; `l` los libera.
 
 ### 2 · Carga
 
-Registra una **función de enganche** en la tarea inactiva de cada núcleo con `esp_register_freertos_idle_hook_for_cpu()` . Cada una cuenta sus llamadas y
+Registra una **función de enganche** en la tarea inactiva de cada núcleo con
+ `esp_register_freertos_idle_hook_for_cpu()`. Cada una cuenta sus llamadas y
 devuelve `false`, para que la tarea inactiva la llame tan deprisa como pueda.
 Si todas las funciones de enganche de un núcleo devolvieran `true`, la tarea
 inactiva pararía el procesador hasta la siguiente interrupción y las llamaría
